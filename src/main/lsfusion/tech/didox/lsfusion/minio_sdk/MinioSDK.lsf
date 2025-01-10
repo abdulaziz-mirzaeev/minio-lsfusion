@@ -1,0 +1,48 @@
+MODULE MinioSDK;
+
+REQUIRE MasterData;
+
+CLASS MinioSettings;
+endpoint = DATA STRING(MinioSettings);
+accessKey = DATA STRING(MinioSettings);
+secretKey = DATA STRING(MinioSettings);
+
+minioSettings = GROUP LAST MinioSettings ms IF ms IS MinioSettings ORDER ms;
+minioEndpoint = endpoint(minioSettings());
+minioAccessKey = accessKey(minioSettings());
+minioSecretKey = secretKey(minioSettings());
+
+//---------------------------------------------------------------------------------------------------------------------
+storageObject = DATA LOCAL NESTED FILE();
+getStorageObject INTERNAL 'tech.didox.lsfusion.minio_sdk.actions.GetObject' (STRING, STRING); // bucket, objectPath
+
+
+putStorageObjectSuccess = DATA LOCAL NESTED BOOLEAN();
+putStorageObject INTERNAL 'tech.didox.lsfusion.minio_sdk.actions.PutObject' (STRING, STRING, STRING, FILE); // bucket, objectPath, contentType, file
+
+
+removeStorageObjectSuccess = DATA LOCAL NESTED BOOLEAN ();
+removeStorageObject INTERNAL 'tech.didox.lsfusion.minio_sdk.actions.RemoveObject' (STRING, STRING); // bucket, objectPath
+
+
+FORM minioSettings 'Minio Storage Settings'
+    OBJECTS m = MinioSettings
+    PROPERTIES(m) endpoint, accessKey, secretKey
+    PROPERTIES(m) NEWSESSION NEW, DELETE
+
+    LIST MinioSettings OBJECT m
+;
+
+FORM editMinioSettings
+    OBJECTS m = MinioSettings PANEL
+    PROPERTIES(m) endpoint, accessKey, secretKey
+
+    EDIT MinioSettings OBJECT m
+;
+
+
+NAVIGATOR {
+    masterData {
+        NEW minioSettings;
+    }
+}
