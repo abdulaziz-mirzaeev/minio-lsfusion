@@ -10,8 +10,8 @@ import lsfusion.server.language.ScriptingLogicsModule;
 import lsfusion.server.logics.action.controller.context.ExecutionContext;
 import lsfusion.server.logics.classes.ValueClass;
 import lsfusion.server.logics.property.classes.ClassPropertyInterface;
-
-import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.nio.file.Files;
 import java.sql.SQLException;
 
 public class PutObject extends MinioAction {
@@ -26,8 +26,7 @@ public class PutObject extends MinioAction {
         try {
             String bucketName = (String) this.getParam(0, context);
             String objectPath = (String) this.getParam(1, context);
-            String contentType = (String) this.getParam(2, context);
-            FileData file = (FileData) this.getParam(3, context);
+            FileData file = (FileData) this.getParam(2, context);
 
             MinioClient client = this.getMinioClient(context);
 
@@ -38,10 +37,11 @@ public class PutObject extends MinioAction {
                 System.out.println("Bucket created: " + bucketName);
             }
 
+            String contentType = Files.probeContentType(new File("temp." + file.getExtension()).toPath());
             PutObjectArgs args = PutObjectArgs.builder()
                 .bucket(bucketName)
                 .object(objectPath)
-                .stream(new ByteArrayInputStream(file.getBytes()), file.getBytes().length, -1)
+                .stream(file.getRawFile().getInputStream(), file.getRawFile().getLength(), -1)
                 .contentType(contentType)
                 .build();
 
