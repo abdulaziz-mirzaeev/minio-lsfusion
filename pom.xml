@@ -3,13 +3,94 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Venkon-R-D-Team/lsfusion-minio-sdk</url>
-        </repository>
-    </distributionManagement>
+
+    <name>Minio Java SDK LsFusion Adapter</name>
+    <description>
+        This library was developed as an Minio object storage Java SDK adapter for LsFusion platform
+    </description>
+    <url>https://github.com/abdulaziz-mirzaeev/minio-lsfusion</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/license/mit</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Abdulaziz Mirzaev</name>
+            <email>abdulaziz.ismail2003@gmail.com</email>
+            <organization>Didox Tech LLC</organization>
+            <organizationUrl>https://didox.uz/</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/abdulaziz-mirzaeev/minio-lsfusion.git</connection>
+        <developerConnection>scm:git:ssh://github.com/abdulaziz-mirzaeev/minio-lsfusion.git</developerConnection>
+        <url>https://github.com/abdulaziz-mirzaeev/minio-lsfusion.git</url>
+    </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.6.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <repositories>
         <repository>
@@ -22,12 +103,12 @@
     <parent>
         <groupId>lsfusion.platform.build</groupId>
         <artifactId>logics</artifactId>
-        <version>6.0-20250110.145228-1690</version>
+        <version>6.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>tech.didox.lsfusion</groupId>
-    <artifactId>minio-sdk</artifactId>
-    <version>1.0</version>
+    <groupId>io.github.abdulaziz-mirzaeev</groupId>
+    <artifactId>minio-lsfusion</artifactId>
+    <version>1.0.1</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

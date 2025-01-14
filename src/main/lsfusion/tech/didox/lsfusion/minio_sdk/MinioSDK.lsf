@@ -18,7 +18,7 @@ getStorageObject INTERNAL 'tech.didox.lsfusion.minio_sdk.actions.GetObject' (STR
 
 
 putStorageObjectSuccess = DATA LOCAL NESTED BOOLEAN();
-putStorageObject INTERNAL 'tech.didox.lsfusion.minio_sdk.actions.PutObject' (STRING, STRING, STRING, FILE); // bucket, objectPath, contentType, file
+putStorageObject INTERNAL 'tech.didox.lsfusion.minio_sdk.actions.PutObject' (STRING, STRING, FILE); // bucket, objectPath, file
 
 
 removeStorageObjectSuccess = DATA LOCAL NESTED BOOLEAN ();

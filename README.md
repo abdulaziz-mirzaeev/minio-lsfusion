@@ -12,8 +12,8 @@
 Add the library to your project through Maven. The following snippet should be added to the `pom.xml` file.
 ```xml
 <dependency>
-    <groupId>tech.didox.lsfusion</groupId>
-    <artifactId>minio-sdk</artifactId>
+    <groupId>io.github.abdulaziz-mirzaeev</groupId>
+    <artifactId>minio-lsfusion</artifactId>
     <version>1.0</version>
 </dependency>
 ```
@@ -54,7 +54,7 @@ onStarted() + {
 API
 
 - `getStorageObject(STRING bucketName, STRING objectPath)`
-- `putStorageObject(STRING bucketName, STRING objectPath, STRING contentType, FILE file)`
+- `putStorageObject(STRING bucketName, STRING objectPath, FILE file)`
 - `removeStorageObject(STRING bucketName, STRING objectPath)`
 
 Examples:
@@ -72,7 +72,7 @@ exportFile() <- storageObject();
 REQUIRE MinioSDK;
 
 generateUUID();
-putStorageObject('json', (CONCAT '.', generatedUUID(), extension(f)), 'application/json', f);
+putStorageObject('json', (CONCAT '.', generatedUUID(), extension(f)), f);
 // putStorageObjectSuccess() boolean property will be filled
 exportString() <- 'success';
 ```
