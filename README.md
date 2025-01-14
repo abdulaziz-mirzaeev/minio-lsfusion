@@ -14,7 +14,7 @@ Add the library to your project through Maven. The following snippet should be a
 <dependency>
     <groupId>io.github.abdulaziz-mirzaeev</groupId>
     <artifactId>minio-lsfusion</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
