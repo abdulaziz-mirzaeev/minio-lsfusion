@@ -38,4 +38,17 @@ public abstract class MinioAction extends InternalAction {
             throw Throwables.propagate(e);
         }
     }
+
+    public static String getFileExtension(String fileName) {
+        if (fileName == null || fileName.isEmpty()) {
+            return ""; // Return empty string if the file name is null or empty
+        }
+
+        int lastDotIndex = fileName.lastIndexOf('.');
+        if (lastDotIndex > 0 && lastDotIndex < fileName.length() - 1) {
+            return fileName.substring(lastDotIndex + 1); // Return the substring after the last dot
+        }
+
+        return ""; // Return empty string if no extension is found
+    }
 }
